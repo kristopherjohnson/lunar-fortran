@@ -1,0 +1,8 @@
+{
+    "fortran.linterExtraArgs": [
+        "-Wall",
+        "-std=f95",
+        "-ffree-form"
+    ],
+    "editor.renderIndentGuides": false
+}
