@@ -7,7 +7,7 @@ program lunar
     implicit none
 
     common A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
-    real :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
+    double precision :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
     integer :: loop
     character(len=3) :: answer
 
@@ -119,7 +119,7 @@ end program lunar
 subroutine update()
     implicit none
     common A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
-    real :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
+    double precision :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
 
     L = L + S
     T = T - S
@@ -132,7 +132,7 @@ end subroutine update
 subroutine delta()
     implicit none
     common A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
-    real :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
+    double precision :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
 
     Q = S*K/M
     J = V + G*S + Z*(-Q - Q**2/2 - Q**3/3 - Q**4/4 - Q**5/5)

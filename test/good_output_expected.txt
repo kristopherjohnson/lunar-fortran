@@ -26,12 +26,12 @@ TIME,SECS   ALTITUDE,MILES+FEET   VELOCITY,MPH   FUEL,LBS   FUEL RATE
     140               1   2263         522.40      2200.0      K=: 130
     150               0   3000          91.49       900.0      K=:  15
     160               0   1805          71.39       750.0      K=:  15
-    170               0    908          50.79       600.0      K=:  15
+    170               0    908          50.80       600.0      K=:  15
     180               0    317          29.70       450.0      K=:  14
     190               0     11          11.96       310.0      K=:  30
-ON THE MOON AT   190.94 SECS
-IMPACT VELOCITY OF     4.49 M.P.H.
-FUEL LEFT:   281.92 LBS
+ON THE MOON AT   190.93 SECS
+IMPACT VELOCITY OF     4.55 M.P.H.
+FUEL LEFT:   282.11 LBS
 GOOD LANDING-(COULD BE BETTER)
 
 
