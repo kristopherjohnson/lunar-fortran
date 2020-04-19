@@ -8,6 +8,7 @@ program lunar
 
     common A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
     real :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
+    integer :: loop
 
  10 format (A)
  20 format (A//)
@@ -26,19 +27,21 @@ program lunar
     N = 16500
     G = 0.001
     Z = 1.8
+    L = 0
 
 210 write(*,211,advance="no") nint(L), int(A), nint(5280*(A-int(A))), 3600*V, M-N, "K=:"
 211 format (i7, i16, i7, F15.2, F12.1, A9)
-
     read*, K
     T=10
 270 if(K.gt.200) goto 272
     if(K.lt.0) goto 272
-    if(K.ge.8)goto 310
+    if(K.ge.8) goto 310
     if(K.gt.0) goto 272
     goto 310
-272 write(*,10,advance="no") "NOT POSSIBLE...................................................K=:"
-    read*,K
+272 write(*,10,advance="no") "NOT POSSIBLE"
+    do loop = 1, 51; write(*,10,advance="no") "."; end do
+    write(*,10,advance="no") "K=:"
+    read*, K
     goto 270
 
 310 if((M-N).lt.0.001) goto 410
@@ -46,11 +49,11 @@ program lunar
     S = T
     if((N+S*K).le.M) goto 350
     S = (M-N)/K
-350 call sub9()
+350 call delta()
     if(I.le.0) goto 710
     if(V.le.0) goto 380
     if(J.lt.0) goto 810
-380 call sub6()
+380 call update()
     goto 310
 
 410 write(*,30) "FUEL OUT AT",L," SECS"!
@@ -87,15 +90,15 @@ program lunar
 
 710 if(S.lt.0.005) goto 510
     S = 2*A/(V + sqrt(V*V + 2*A*(G - Z*K/M)))
-    call sub9()
-    call sub6()
+    call delta()
+    call update()
     goto 710
 
 810 W = (1 - M*G/(Z*K))/2
     S = M*V/(Z*K*(W+sqrt(W*W + V/Z)))+.05
-    call sub9()
+    call delta()
     if(I.le.0) goto 710
-    call sub6()
+    call update()
     if(J.ge.0) goto 310
     if(V.le.0) goto 310
     goto 810
@@ -103,21 +106,21 @@ program lunar
 end program lunar
 
 ! (Subroutine in section 06 of original FOCAL source)
-subroutine sub6()
+subroutine update()
     implicit none
     common A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
     real :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
 
-    L = L+S
-    T = T-S
-    M = M-S*K
+    L = L + S
+    T = T - S
+    M = M - S*K
     A = I
     V = J
     return
-end subroutine sub6
+end subroutine update
 
 ! (Subroutine in section 09 of original FOCAL source)
-subroutine sub9()
+subroutine delta()
     implicit none
     common A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
     real :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
@@ -126,4 +129,4 @@ subroutine sub9()
     J = V + G*S + Z*(-Q - Q**2/2 - Q**3/3 - Q**4/4 - Q**5/5)
     I = A - G*S * S/2 - V*S + Z*S*(Q/2 + Q**2/6 + Q**3/12 + Q**4/20 + Q**5/30)
     return
-end subroutine sub9
+end subroutine delta
