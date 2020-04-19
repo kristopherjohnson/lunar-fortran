@@ -33,10 +33,10 @@ program lunar
 211 format (i7, i16, i7, F15.2, F12.1, A9)
     read*, K
     T=10
-270 if(K.gt.200) goto 272
-    if(K.lt.0) goto 272
-    if(K.ge.8) goto 310
-    if(K.gt.0) goto 272
+270 if(K>200) goto 272
+    if(K<0) goto 272
+    if(K>=8) goto 310
+    if(K>0) goto 272
     goto 310
 272 write(*,10,advance="no") "NOT POSSIBLE"
     do loop = 1, 51; write(*,10,advance="no") "."; end do
@@ -44,15 +44,15 @@ program lunar
     read*, K
     goto 270
 
-310 if((M-N).lt.0.001) goto 410
-    if(T.lt.0.001) goto 210
+310 if((M-N)<0.001) goto 410
+    if(T<0.001) goto 210
     S = T
-    if((N+S*K).le.M) goto 350
+    if((N+S*K)<=M) goto 350
     S = (M-N)/K
 350 call delta()
-    if(I.le.0) goto 710
-    if(V.le.0) goto 380
-    if(J.lt.0) goto 810
+    if(I<=0) goto 710
+    if(V<=0) goto 380
+    if(J<0) goto 810
 380 call update()
     goto 310
 
@@ -65,19 +65,19 @@ program lunar
     W = 3600*V
     write(*,30) "IMPACT VELOCITY OF", W, " M.P.H."
     write(*,30) "FUEL LEFT:", M-N, " LBS"
-    if(W.gt.1) goto 550
+    if(W>1) goto 550
     write(*,10) "PERFECT LANDING !-(LUCKY)"
     goto 590
-550 if(W.gt.10) goto 560
+550 if(W>10) goto 560
     write(*,10) "GOOD LANDING-(COULD BE BETTER)"
     goto 590
-560 if(W.gt.22) goto 570
+560 if(W>22) goto 570
     write(*,10) "CONGRATULATIONS ON A POOR LANDING"
     goto 590
-570 if(W.gt.40) goto 581
+570 if(W>40) goto 581
     write(*,10) "CRAFT DAMAGE. GOOD LUCK"
     goto 590
-581 if(W.gt.60) goto 582
+581 if(W>60) goto 582
     write(*,10) "CRASH LANDING-YOU'VE 5 HRS OXYGEN"
     goto 590
 582 write(*,10) "SORRY,BUT THERE WERE NO SURVIVORS-YOU BLEW IT!"
@@ -88,7 +88,7 @@ program lunar
 598 write(*,20) "CONTROL OUT"
     stop
 
-710 if(S.lt.0.005) goto 510
+710 if(S<0.005) goto 510
     S = 2*A/(V + sqrt(V*V + 2*A*(G - Z*K/M)))
     call delta()
     call update()
@@ -97,10 +97,10 @@ program lunar
 810 W = (1 - M*G/(Z*K))/2
     S = M*V/(Z*K*(W+sqrt(W*W + V/Z)))+.05
     call delta()
-    if(I.le.0) goto 710
+    if(I<=0) goto 710
     call update()
-    if(J.ge.0) goto 310
-    if(V.le.0) goto 310
+    if(J>=0) goto 310
+    if(V<=0) goto 310
     goto 810
 
 end program lunar
