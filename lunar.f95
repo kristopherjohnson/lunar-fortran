@@ -9,6 +9,7 @@ program lunar
     common A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
     real :: A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
     integer :: loop
+    character(len=3) :: answer
 
  10 format (A)
  20 format (A//)
@@ -83,10 +84,15 @@ program lunar
 582 write(*,10) "SORRY,BUT THERE WERE NO SURVIVORS-YOU BLEW IT!"
     write(*,30) "IN FACT YOU BLASTED A NEW LUNAR CRATER", W*0.277777, " FT.DEEP."
 590 write(*,'(///A)') "TRY AGAIN?"
-! 592 A "(ANS. YES OR NO)"P;I (P-0NO)5.94,5.98
-! 594 I (P-0YES)5.92,1.2,5.92
+592 write(*,10,advance="no") "(ANS. YES OR NO):"
+    read*, answer
+    if(answer=="Y" .or. answer=="y" .or. answer=="YES" .or. answer=="yes") goto 120
+    if(answer=="N" .or. answer=="n" .or. answer=="NO" .or. answer=="no") goto 598
+    goto 592
 598 write(*,20) "CONTROL OUT"
     stop
+
+    ! Section 06.10 of original FOCAL code is in subroutine update()
 
 710 if(S<0.005) goto 510
     S = 2*A/(V + sqrt(V*V + 2*A*(G - Z*K/M)))
@@ -103,9 +109,10 @@ program lunar
     if(V<=0) goto 310
     goto 810
 
+    ! Section 09.10 of original FOCAL code is in subroutine delta()
+
 end program lunar
 
-! (Subroutine in section 06 of original FOCAL source)
 subroutine update()
     implicit none
     common A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
@@ -119,7 +126,6 @@ subroutine update()
     return
 end subroutine update
 
-! (Subroutine in section 09 of original FOCAL source)
 subroutine delta()
     implicit none
     common A, G, I, J, K, L, M, N, Q, S, T, V, W, Z
