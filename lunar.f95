@@ -30,11 +30,11 @@ program lunar
     Z = 1.8
     L = 0
 
-210 write(*,211,advance="no") nint(L), int(A), nint(5280*(A-int(A))), 3600*V, M-N, "K=:"
+210 T = 10
+    write(*,211,advance="no") nint(L), int(A), nint(5280*(A-int(A))), 3600*V, M-N, "K=:"
 211 format (i7, i16, i7, F15.2, F12.1, A9)
-    read*, K
+    read(*,*,err=272) K
     !TEST:write(*,"(I4)") int(K)
-    T=10
 270 if(K>200) goto 272
     if(K<0) goto 272
     if(K>=8) goto 310
@@ -43,7 +43,7 @@ program lunar
 272 write(*,10,advance="no") "NOT POSSIBLE"
     do loop = 1, 51; write(*,10,advance="no") "."; end do
     write(*,10,advance="no") "K=:"
-    read*, K
+    read(*,*,err=272) K
     !TEST:write(*,"(I4)") int(K)
     goto 270
 
