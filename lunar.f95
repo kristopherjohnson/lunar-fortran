@@ -33,6 +33,7 @@ program lunar
 210 write(*,211,advance="no") nint(L), int(A), nint(5280*(A-int(A))), 3600*V, M-N, "K=:"
 211 format (i7, i16, i7, F15.2, F12.1, A9)
     read*, K
+    !TEST:write(*,"(I4)") int(K)
     T=10
 270 if(K>200) goto 272
     if(K<0) goto 272
@@ -43,6 +44,7 @@ program lunar
     do loop = 1, 51; write(*,10,advance="no") "."; end do
     write(*,10,advance="no") "K=:"
     read*, K
+    !TEST:write(*,"(I4)") int(K)
     goto 270
 
 310 if((M-N)<0.001) goto 410
@@ -82,10 +84,11 @@ program lunar
     write(*,10) "CRASH LANDING-YOU'VE 5 HRS OXYGEN"
     goto 590
 582 write(*,10) "SORRY,BUT THERE WERE NO SURVIVORS-YOU BLEW IT!"
-    write(*,30) "IN FACT YOU BLASTED A NEW LUNAR CRATER", W*0.277777, " FT.DEEP."
+    write(*,30) "IN FACT YOU BLASTED A NEW LUNAR CRATER", W*0.277777, " FT. DEEP"
 590 write(*,'(///A)') "TRY AGAIN?"
 592 write(*,10,advance="no") "(ANS. YES OR NO):"
     read*, answer
+    !TEST:write(*,10) answer
     if(answer=="Y" .or. answer=="y" .or. answer=="YES" .or. answer=="yes") goto 120
     if(answer=="N" .or. answer=="n" .or. answer=="NO" .or. answer=="no") goto 598
     goto 592
