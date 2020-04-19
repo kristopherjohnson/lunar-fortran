@@ -1,6 +1,6 @@
 # GNU Fortran
 F95:=gfortran
-F95FLAGS:=-Wall -Wno-unused-variable -Wno-unused-label -std=f95 -ffree-form
+F95FLAGS:=-std=f95 -ffree-form -g -Wall -Wno-unused-variable -Wno-unused-label
 
 % : %.f95
 	$(F95) $(F95FLAGS) -o $@ $<
