@@ -4,3 +4,7 @@ lunar-test.f95
 failure_output.txt
 good_output.txt
 success_output.txt
+.DS_Store
+.vscode
+.claude
+
